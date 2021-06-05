@@ -1,8 +1,9 @@
 import 'dart:math';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tic_tac_toe/providers/game_state_provider.dart';
-import 'package:tic_tac_toe/utils/players.dart';
+
+import '../utils/players.dart';
+import 'game_state_provider.dart';
 
 enum BoardElement { none, cross, nought }
 

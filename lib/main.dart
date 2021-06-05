@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tic_tac_toe/screens/game_screen.dart';
-import 'package:tic_tac_toe/screens/main_screen.dart';
+
+import 'screens/main_screen.dart';
 
 void main() {
   runApp(ProviderScope(child: MyApp()));
