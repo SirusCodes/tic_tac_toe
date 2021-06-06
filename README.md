@@ -1,16 +1,14 @@
-# tic_tac_toe
+# Tic Tac Toe with Spotify
 
-A new Flutter project.
+This a project to integrate spotify into a flutter app.
 
-## Getting Started
+Main Screen | Game Screen | End Screen
+---|---|---
+![Main Screen](images/start.png) | ![Game Screen](images/game.png) | ![End Screen](images/won.png)
 
-This project is a starting point for a Flutter application.
+### Build
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+1. Signup for spotify account at [developer portal](https://developer.spotify.com/dashboard/).
+2. Run `cp .\lib\api_keys.example.dart .\lib\api_keys.dart`
+3. Replace your client ID.
+4. Run `flutter build apk`
