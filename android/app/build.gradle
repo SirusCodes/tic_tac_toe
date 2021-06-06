@@ -56,4 +56,7 @@ flutter {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation files('../libs/spotify-app-remote-release-0.7.2.aar')
+    implementation files('../libs/spotify-auth-release-1.2.3.aar')
+    implementation "com.google.code.gson:gson:2.8.5"
 }

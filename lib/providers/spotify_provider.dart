@@ -1,0 +1,34 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:spotify_sdk/models/player_state.dart';
+import 'package:spotify_sdk/spotify_sdk.dart';
+
+import '../api_keys.dart';
+
+final playerState = StreamProvider.autoDispose<PlayerState>((ref) {
+  return ref.read(spotifyService).subPlayerState();
+});
+
+final spotifyService = Provider<SpotifyService>((ref) {
+  return SpotifyService();
+});
+
+class SpotifyService {
+  Future<bool> connect() => SpotifySdk.connectToSpotifyRemote(
+        clientId: APIKey.clientId,
+        redirectUrl: APIKey.redirectUrl,
+      );
+
+  Future<bool> disconnect() => SpotifySdk.disconnect();
+
+  Stream<PlayerState> subPlayerState() => SpotifySdk.subscribePlayerState();
+
+  Future play(String spotifyUri) => SpotifySdk.play(spotifyUri: spotifyUri);
+
+  Future resume() => SpotifySdk.resume();
+
+  Future pause() => SpotifySdk.pause();
+
+  Future next() => SpotifySdk.skipNext();
+
+  Future previous() => SpotifySdk.skipPrevious();
+}
