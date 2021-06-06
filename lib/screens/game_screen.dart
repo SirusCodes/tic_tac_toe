@@ -23,7 +23,6 @@ class _GameScreenState extends State<GameScreen> {
   @override
   void dispose() {
     SpotifySdk.pause();
-    SpotifySdk.disconnect();
     super.dispose();
   }
 
