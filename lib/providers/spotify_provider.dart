@@ -5,11 +5,16 @@ import 'package:spotify_sdk/spotify_sdk.dart';
 
 import '../api_keys.dart';
 
+final connectProvider = FutureProvider<bool>((ref) {
+  return ref.read(spotifyService).connect();
+});
+
 final playerState = StreamProvider.autoDispose<PlayerState>((ref) {
   return ref.read(spotifyService).subPlayerState();
 });
 
-final connectionStatusProvider = StreamProvider<ConnectionStatus>((ref) {
+final connectionStatusProvider =
+    StreamProvider.autoDispose<ConnectionStatus>((ref) {
   return ref.read(spotifyService).connectionStatus();
 });
 
