@@ -14,12 +14,11 @@ class MainScreen extends StatelessWidget {
           const Spacer(),
           Image.asset(
             "assets/tictactoe.png",
-            alignment: Alignment.center,
             height: 200,
           ),
           RichText(
             textAlign: TextAlign.center,
-            text: TextSpan(
+            text: const TextSpan(
               style: TextStyle(
                 fontSize: 25,
                 fontWeight: FontWeight.bold,
@@ -28,7 +27,7 @@ class MainScreen extends StatelessWidget {
               children: <TextSpan>[
                 TextSpan(
                   text: "Spotify",
-                  style: TextStyle(color: const Color(0xFF1ED760)),
+                  style: TextStyle(color: Color(0xFF1ED760)),
                 ),
                 TextSpan(text: " Tic Tac Toe"),
               ],
@@ -40,9 +39,9 @@ class MainScreen extends StatelessWidget {
             child: ElevatedButton(
               onPressed: () => Navigator.push(
                 context,
-                MaterialPageRoute(builder: (_) => GameScreen()),
+                MaterialPageRoute(builder: (_) => const GameScreen()),
               ),
-              child: Text("Let's play!!"),
+              child: const Text("Let's play!!"),
             ),
           ),
         ],

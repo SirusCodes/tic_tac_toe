@@ -35,7 +35,9 @@ class _GameScreenState extends State<GameScreen> {
           case GameState.player1:
             break;
           case GameState.player2:
-            context.read(boardProvider.notifier).playForMachine(Machine());
+            context
+                .read(boardProvider.notifier)
+                .playForMachine(const Machine());
             break;
           case GameState.tie:
             _showDialog(context, "It's a Tie⚔");
@@ -53,9 +55,9 @@ class _GameScreenState extends State<GameScreen> {
           padding: const EdgeInsets.all(20.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [
+            children: const <Widget>[
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 60),
+                padding: EdgeInsets.symmetric(vertical: 60),
                 child: Text(
                   "You are playing as X",
                   style: TextStyle(fontSize: 25),
@@ -86,7 +88,7 @@ class _GameScreenState extends State<GameScreen> {
                 Text(
                   result,
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 30),
+                  style: const TextStyle(fontSize: 30),
                 ),
                 const SizedBox(height: 25),
                 ElevatedButton.icon(
@@ -94,8 +96,8 @@ class _GameScreenState extends State<GameScreen> {
                     context.read(boardProvider.notifier).resetBoard();
                     Navigator.pop(context);
                   },
-                  icon: Icon(Icons.repeat),
-                  label: Text("Restart"),
+                  icon: const Icon(Icons.repeat),
+                  label: const Text("Restart"),
                 ),
                 const SizedBox(height: 5),
                 ElevatedButton.icon(
@@ -105,8 +107,8 @@ class _GameScreenState extends State<GameScreen> {
                     Navigator.pop(context);
                     Navigator.pop(context);
                   },
-                  icon: Icon(Icons.exit_to_app_rounded),
-                  label: Text("Quit"),
+                  icon: const Icon(Icons.exit_to_app_rounded),
+                  label: const Text("Quit"),
                 ),
               ],
             ),
@@ -124,10 +126,7 @@ class SpotifyImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: SpotifySdk.getImage(
-        imageUri: imageUri,
-        dimension: ImageDimension.medium,
-      ),
+      future: SpotifySdk.getImage(imageUri: imageUri),
       builder: (BuildContext context, AsyncSnapshot<Uint8List?> snapshot) {
         if (snapshot.hasData) {
           return Image.memory(snapshot.data!);
@@ -150,7 +149,7 @@ class SpotifyImage extends StatelessWidget {
 }
 
 class _PlayerControls extends StatelessWidget {
-  _PlayerControls({Key? key}) : super(key: key);
+  const _PlayerControls({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -159,19 +158,19 @@ class _PlayerControls extends StatelessWidget {
       children: <Widget>[
         IconButton(
           onPressed: () => context.read(spotifyService).previous(),
-          icon: Icon(Icons.skip_previous_rounded),
+          icon: const Icon(Icons.skip_previous_rounded),
         ),
         IconButton(
           onPressed: () => context.read(spotifyService).resume(),
-          icon: Icon(Icons.play_arrow_rounded),
+          icon: const Icon(Icons.play_arrow_rounded),
         ),
         IconButton(
           onPressed: () => context.read(spotifyService).pause(),
-          icon: Icon(Icons.pause_rounded),
+          icon: const Icon(Icons.pause_rounded),
         ),
         IconButton(
           onPressed: () => context.read(spotifyService).next(),
-          icon: Icon(Icons.skip_next_rounded),
+          icon: const Icon(Icons.skip_next_rounded),
         ),
       ],
     );
@@ -209,7 +208,7 @@ class _PlayerDetails extends ConsumerWidget {
                         track.album.name,
                         style: Theme.of(context).textTheme.subtitle2,
                       ),
-                      _PlayerControls()
+                      const _PlayerControls()
                     ],
                   ),
                 )
@@ -222,7 +221,7 @@ class _PlayerDetails extends ConsumerWidget {
       loading: () => const Center(
         child: CircularProgressIndicator(),
       ),
-      error: (err, st) => Text("Something went wrong"),
+      error: (err, st) => const Text("Something went wrong"),
     );
   }
 }
@@ -235,18 +234,18 @@ class _PlayerCard extends ConsumerWidget {
     final connectionStatus = watch(connectionStatusProvider);
     return connectionStatus.when(
       data: (status) {
-        return Card(
-          child: const _PlayerDetails(),
+        return const Card(
+          child: _PlayerDetails(),
         );
       },
       loading: () => ElevatedButton(
         onPressed: () {
           context.read(spotifyService).connect();
         },
-        child: Text("Connect Spotify"),
+        child: const Text("Connect Spotify"),
       ),
       error: (err, st) {
-        return Text("Something went wrong");
+        return const Text("Something went wrong");
       },
     );
   }
@@ -261,19 +260,20 @@ class _GameGrid extends ConsumerWidget {
 
     return GridView.count(
       crossAxisCount: 3,
-      physics: NeverScrollableScrollPhysics(),
-      childAspectRatio: 1,
+      physics: const NeverScrollableScrollPhysics(),
       children: List.generate(
         9,
         (index) => _Field(
           onTap: () {
-            context.read(boardProvider.notifier).onPlayerMove(Human(), index);
+            context
+                .read(boardProvider.notifier)
+                .onPlayerMove(const Human(), index);
           },
           child: boardState[index] == BoardElement.none
-              ? SizedBox.shrink()
+              ? const SizedBox.shrink()
               : boardState[index] == BoardElement.cross
-                  ? CrossWidget()
-                  : NoughtWidget(),
+                  ? const CrossWidget()
+                  : const NoughtWidget(),
         ),
       ),
     );

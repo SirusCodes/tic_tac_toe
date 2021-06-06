@@ -20,7 +20,7 @@ class _CrossPainter extends CustomPainter {
     final width = size.width;
     final height = size.height;
 
-    canvas.drawLine(Offset(0, 0), Offset(width, height), painter);
+    canvas.drawLine(const Offset(0, 0), Offset(width, height), painter);
     canvas.drawLine(Offset(0, height), Offset(width, 0), painter);
   }
 

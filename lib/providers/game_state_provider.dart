@@ -26,8 +26,8 @@ class GameStateProvider extends StateNotifier<GameState> {
     state = GameState.player1;
   }
 
-  evaluateBoard(List<BoardElement> boardState) {
-    for (var condition in _winningConditions) {
+  void evaluateBoard(List<BoardElement> boardState) {
+    for (final condition in _winningConditions) {
       if (boardState[condition[0]] != BoardElement.none &&
           boardState[condition[0]] == boardState[condition[1]] &&
           boardState[condition[1]] == boardState[condition[2]]) {
@@ -44,16 +44,16 @@ class GameStateProvider extends StateNotifier<GameState> {
     _nextTurn();
   }
 
-  _nextTurn() {
+  void _nextTurn() {
     state = state == GameState.player1 ? GameState.player2 : GameState.player1;
   }
 
   bool _isTie(List<BoardElement> boardState) {
-    for (var ele in boardState) if (ele == BoardElement.none) return false;
+    for (final ele in boardState) if (ele == BoardElement.none) return false;
     return true;
   }
 
-  _playerWon() {
+  void _playerWon() {
     if (state == GameState.player1)
       state = GameState.player1Won;
     else
