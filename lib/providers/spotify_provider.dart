@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:spotify_sdk/models/connection_status.dart';
 import 'package:spotify_sdk/models/player_state.dart';
 import 'package:spotify_sdk/spotify_sdk.dart';
 
@@ -8,11 +9,18 @@ final playerState = StreamProvider.autoDispose<PlayerState>((ref) {
   return ref.read(spotifyService).subPlayerState();
 });
 
+final connectionStatusProvider = StreamProvider<ConnectionStatus>((ref) {
+  return ref.read(spotifyService).connectionStatus();
+});
+
 final spotifyService = Provider<SpotifyService>((ref) {
   return SpotifyService();
 });
 
 class SpotifyService {
+  Stream<ConnectionStatus> connectionStatus() =>
+      SpotifySdk.subscribeConnectionStatus();
+
   Future<bool> connect() => SpotifySdk.connectToSpotifyRemote(
         clientId: APIKey.clientId,
         redirectUrl: APIKey.redirectUrl,
